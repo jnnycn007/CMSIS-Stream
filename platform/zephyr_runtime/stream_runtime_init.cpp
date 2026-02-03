@@ -167,6 +167,8 @@ static void stream_thread_function(void *, void *, void *)
 
 void stream_pause_current_scheduler()
 {
+	LOG_DBG("Try to pause event queue\n");
+	current_context.load()->evtQueue->pause();
 	// If the graph is a pure event graph (scheduler_len == 0), the dataflow part
 	// is already paused so no need to post a pause event
 	uint32_t res;
@@ -180,8 +182,7 @@ void stream_pause_current_scheduler()
 			k_event_clear(&cg_streamReplyEvent, STREAM_PAUSED_EVENT);
 		}
 	}
-	LOG_DBG("Try to pause event queue\n");
-	current_context.load()->evtQueue->pause();
+	
 	res = k_event_wait(&cg_streamReplyEvent, EVENT_PAUSED_EVENT, false, K_FOREVER);
 	if ((res & EVENT_PAUSED_EVENT) != 0)
 	{
