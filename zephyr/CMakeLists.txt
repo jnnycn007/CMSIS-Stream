@@ -1,4 +1,4 @@
-if(CONFIG_CMSIS_DSP)
+if(CONFIG_CMSISSTREAM)
 zephyr_library()
 
 zephyr_library_sources(
