@@ -30,6 +30,12 @@ set_target_properties(posix_runtime PROPERTIES
     OUTPUT_NAME cmsis_stream_runtime
 )
 
+if(MSVC)
+    set_property(TARGET posix_runtime PROPERTY
+        MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+    )
+endif()
+
 target_include_directories(posix_runtime PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>

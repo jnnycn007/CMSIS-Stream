@@ -41,6 +41,9 @@ cmake --build build/posix_runtime --config Release
 cmake --install build/posix_runtime --config Release
 ```
 
+On Windows with MSVC, the runtime is built against the static C runtime:
+Release uses `/MT` and Debug uses `/MTd`.
+
 CMake installs the package configuration file under:
 
 ```text
